@@ -1,0 +1,12 @@
+@import "./src/style/_config.scss";
+
+.Player {
+  display: block; // instead of list-item
+  background: $light;
+    position: relative;
+
+  p {
+    margin: 0;
+    padding: 0.5rem 0.7rem;
+  }
+}

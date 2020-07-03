@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import Player from "./Player/Player";
+import React, { useState, useEffect } from "react";
+import Player from "./Player";
 import AddPlayerForm from "./AddPlayerForm";
-import "./Scoreboard/Scoreboard.scss";
 
 function compare_score(player_a, player_b) {
   return player_b.score - player_a.score;
@@ -39,9 +38,8 @@ export default function Scoreboard() {
   // console.log("changesorting", change_sorting)
 
   const incrementScore = (id) => {
-    // console.log("is this id showing", id);
+    console.log("is this id showing", id);
     const new_players_array = players.map((player) => {
-      console.log("what is id", id);
       // decide whether this player's score needs to be incremented
       if (player.id === id) {
         // and if so, create a new player object,
@@ -58,42 +56,32 @@ export default function Scoreboard() {
     });
     set_players(new_players_array);
     console.log("what is", new_players_array);
-  };
+    };
 
-  //   useEffect(() => {
-  //     console.log("The useEffect action!");
-  //   }, [player.score]);
+    
 
-  //   const reset = () => {
-  //     console.log("No, reset! Number of likes back to zero");
-  //     players((incrementScore) => 0);
-  //   }
-  //   };
+    //   useEffect(() => {
+    //     console.log("The useEffect action!");
+    //   }, [player.score]);
 
-  const resetScore = () => {
-    const players_reset = players.map((player) => {
-      if (player) {
-        return {
-          ...player,
-          score: player.score - player.score,
-        };
-      } else {
-        return player;
-      }
-    });
-    set_players(players_reset);
-  };
-
-  const addPlayer = (name) => {
-    console.log("Let's add a new player with the name:", name);
-    const newPlayer = {
-      name: name, 
-      score: 0,
-      id: players.length + 1,
+    //   const reset = () => {
+    //     console.log("No, reset! Number of likes back to zero");
+    //     players((incrementScore) => 0);
+    //   }
+//   };
+    const resetScore = () => {
+        const players_reset = players.map((player) => {
+          if (player) {
+            return {
+              ...player,
+              score: player.score - player.score,
+            };
+          } else {
+            return player;
+          }
+      });
+      set_players(players_reset);
     }
-    const newPlayers = [...players, newPlayer]
-    set_players(newPlayers);
-  };
 
   return (
     <div className="Scoreboard">
@@ -116,7 +104,8 @@ export default function Scoreboard() {
           incrementScore={incrementScore}
         />
       ))}
-      <AddPlayerForm addPlayer={addPlayer}/>
+
+      <AddPlayerForm />
     </div>
   );
 }
